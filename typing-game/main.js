@@ -5,17 +5,41 @@ const timeeDisplay = document.querySelector('#time');
 const messageDisplay = document.querySelector('#message');
 
 const GAME_TIME = 5;
+const API_TIME = 'https://random-word-api.herokuapp.com/word?number=100';
 
 let words = ['banana', 'key', 'car', 'javascript', 'scalper'];
 let score = 0;
 let time = 0;
 let timeInterval;
 let isPlaying = false;
+let isReady = false;
+
+init();
+// function init() {
+//     // const res = fetch(API_TIME).then(res => res.json()).then((data) => words = data); res 한 줄 처리
+
+//     const res = fetch(API_TIME).then((res) => {
+//         return res.json();
+//     }).then((data) => {
+//         words = data;
+//     });
+// }
+
+async function init() {
+    const res = await fetch(API_TIME);
+    const data = await res.json();
+    words = data.filter((item) => {
+        return item.length < 7;
+    })
+    isReady = true;
+    // console.log(words);
+    // words = data;
+}
 
 wordInput.addEventListener('input', (e) => {
     const typedText = e.target.value;
     const currentText = currentWord.innerText;
-    if (typedText.toUpperCase() === currentText.toUpperCase()) {
+    if (typedText.toUpperCase() === currentText.toUpperCase() && isReady) {
         addScore();
         setNewWord();
     }
