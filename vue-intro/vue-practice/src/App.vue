@@ -1,13 +1,23 @@
 <template>
   <div>
-    <h1>Hello Vue!</h1>
-    <h2>5년 후 {{ add(5) }}</h2>
-    <h2>10년 후 {{ add(10) }}</h2>
-    <h2>15년 후 {{ add(15) }}</h2>
-    <h2>20년 후 {{ add(20) }}</h2>
-    <h2>25년 후 {{ add(25) }}</h2>
-    <h2>동갑의 10명이 있다면 나의 총 합은 {{ multiply(age, 20) }}</h2>
-    <h2>{{ getTotalScore(100) }}</h2>
+    <h1>Hello {{ name }}!</h1>
+    <button v-on:click.middle="changeName">change name: click</button>
+    <button
+      v-on:mouseover="name = 'Code Scalper'"
+      v-on:mouseleave="name = 'Scalper'"
+    >
+      change name
+    </button>
+    <a v-on:click.prevent="movePage" href="https://naver.com">naver 로 이동</a>
+    <h2>{{ number }}</h2>
+    <!-- <button v-on:click="number = number + 1">숫자 1 증가</button> -->
+    <!-- <button v-on:click="number = number - 1">숫자 1 감소</button> -->
+    <!-- <button v-on:click="number = number + 5">숫자 5 증가</button> -->
+    <!-- <button v-on:click="number = number - 5">숫자 5 감소</button> -->
+    <button v-on:click="increment($event, 1)">숫자 1 증가</button>
+    <button v-on:click="decrement(1)">숫자 1 감소</button>
+    <button v-on:click="increment(5)">숫자 5 증가</button>
+    <button v-on:click="decrement(5)">숫자 5 감소</button>
   </div>
 </template>
 
@@ -16,29 +26,38 @@ export default {
   name: "App",
   data() {
     return {
-      age: 30,
-      job: "front-end",
+      name: "Scalper",
+      number: 0,
     };
   },
   methods: {
-    add(num) {
-      console.log(this);
-      console.log(num);
-      return this.age + num; // age 접근하려면 this 사용
+    changeName() {
+      this.name = "Code Scalper";
     },
-    multiply(num1, num2 = 10) {
-      return num1 * num2;
+    movePage() {
+      // event.preventDefault(); // v-on:click.prevent 로 가능
+      const check = confirm("페이지를 이동하시겠습니까?");
+      if (check) {
+        console.log("page 이동");
+      } else {
+        console.log("페이지 이동 x");
+      }
     },
-    getTotalScore(num) {
-      console.log(this.job + "입니다.");
-      return this.multiply(num, num);
+    increment(event, num) {
+      // event 받아오기
+      console.log(event); // increment($event, 1) 인자 2개면 이렇게 가져오기
+      this.number = this.number + num;
     },
-    // add: (num) => {
-    //   console.log(this);
-    //   return this.age + num; // lexical scope 함수에 선언에 따라 스코프가 결정
-    // },
+    decrement(num) {
+      this.number = this.number - num;
+    },
   },
 };
 </script>
 
-<style></style>
+<style>
+a {
+  font-size: 24px;
+  display: block;
+}
+</style>
