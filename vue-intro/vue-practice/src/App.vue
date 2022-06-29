@@ -1,33 +1,37 @@
 <template>
   <div>
-    <h1>Hello {{ user.name }}</h1>
-    <h1 v-once v-text="user.name"></h1>
-    <h1 v-text="user.name"></h1>
-    <input type="text" v-model="user.name" />
+    <h1>Hello Vue!</h1>
 
-    <h2 v-if="showName">My name is {{ user.name }}</h2>
-    <h2 v-else>이름을 보여줄 수 없습니다.</h2>
-    <h2 v-if="user.age > 20">당신은 성인입니다.</h2>
-    <h2 v-else-if="user.age > 14 && user.age < 20">당신은 청소년 입니다.</h2>
-    <h2 v-else>당신은 어린이 입니다.</h2>
+    <div>
+      {{ fruits }}
+    </div>
 
-    <h2 v-if="!showName">{{ user.name }} if</h2>
-    <!-- 태그 생성하지 않는다. -->
-    <h2 v-show="!showName">{{ user.name }} show</h2>
-    <!-- 태그 생성됐지만 보이지는 않는다. 자 -->
+    <div>
+      <ul>
+        <li v-for="(fruit, index) in fruits" :key="index">
+          {{ index + 1 }}. {{ fruit }}
+        </li>
+      </ul>
+      <ul>
+        <li v-for="(fruit, index) of fruits" :key="index">
+          {{ index + 1 }}. {{ fruit }}
+        </li>
+      </ul>
+      <h2 v-for="(value, key, index) in user" :key="key">
+        index: {{ index }}, key: {{ key }}, value: {{ value }}
+      </h2>
+      <p v-for="index in 10" :key="index">{{ index }}</p>
+    </div>
 
-    <ul>
-      <template v-if="question === 'frontend'">
-        <li>HTML은 재미있나요?</li>
-        <li>CSS은 재미있나요?</li>
-        <li>Javascript은 재미있나요?</li>
-      </template>
-      <template v-else>
-        <li>Java은 재미있나요?</li>
-        <li>Python은 재미있나요?</li>
-        <li>C#은 재미있나요?</li>
-      </template>
-    </ul>
+    <div v-for="(animal, animalIndex) in animals" :key="animalIndex">
+      <h2>Aniaml > {{ animal.name }}</h2>
+      <h3>food</h3>
+      <ul>
+        <li v-for="(food, foodIndex) in animal.favorites" :key="foodIndex">
+          {{ food }}
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -36,13 +40,17 @@ export default {
   name: "App",
   data() {
     return {
-      question: "back",
-      showName: true,
+      fruits: ["banana", "strawberry", "apple", "melon"],
       user: {
         name: "scalper",
-        age: 20,
-        job: "dev",
+        age: 100,
+        job: "programmer",
       },
+      animals: [
+        { name: "monkey", size: "medium", favorites: ["banana", "apple"] },
+        { name: "lion", size: "big", favorites: ["deer", "cow"] },
+        { name: "rat", size: "small", favorites: ["cheese", "rice"] },
+      ],
     };
   },
 };
