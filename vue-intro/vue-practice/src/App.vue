@@ -1,17 +1,15 @@
 <template>
   <div>
-    <h1>Computed</h1>
-    <h2>{{ address1 }} - {{ address2 }} - {{ address3 }}</h2>
-    <h2>{{ address }}</h2>
-    <h2>
-      내가 받은 점수의 합 {{ grade.math + grade.kor + grade.eng + grade.sci }}
-    </h2>
-    <h2>내가 받은 점수의 합 {{ totalScore }}</h2>
-    <h2>내가 받은 점수의 합 (computed) {{ totalScore }}</h2>
-    <h2>내가 받은 점수의 합 (methods) {{ getTotalScore() }}</h2>
-    영어점수 <input type="number" v-model="grade.eng" />
-    <br />
-    학샘이름 <input type="text" v-model="studentName" />
+    <h1>Watchers</h1>
+    <h2>current money :: {{ money }}</h2>
+    <div>
+      <button @click="money = money + 100">earn money</button>
+      <button @click="money = money - 100">spend money</button>
+    </div>
+    <h2>{{ receit }}</h2>
+    <button @click="receit.food = receit.food + 500">buy food</button>
+    <hr />
+    <input type="text" v-model="userName" />
   </div>
 </template>
 
@@ -21,37 +19,42 @@ export default {
   data() {
     return {
       userName: "scalper",
-      address1: "성남시",
-      address2: "분당구",
-      address3: "정자로",
-      grade: {
-        math: 70,
-        kor: 90,
-        eng: 50,
-        sci: 55,
+      money: 0,
+      receit: {
+        food: 3000,
+        fee: 2000,
+        fare: 10000,
       },
-      studentName: "",
     };
   },
-  computed: {
-    address() {
-      return `${this.address1} - ${this.address2} - ${this.address3}`;
+  computed: {},
+  watch: {
+    userName: {
+      handler(newValue) {
+        console.log(newValue, "newValue");
+      },
+      immediate: true,
     },
-    totalScore() {
-      console.log("computed");
-      const { math, kor, eng, sci } = this.grade;
-      return math + kor + eng + sci;
-      // return this.grade.math + this.grade.kor + this.grade.eng + this.grade.sci;
+    // receit(newValue, oldValue) {
+    //   console.log("영수증에 값 변화가 있음", newValue, oldValue);
+    // },
+    receit: {
+      handler(newValue) {
+        console.log("영수증에 값 변화", newValue);
+      },
+      deep: true,
+    },
+    money(newValue, oldValue) {
+      if (newValue > 2000 && newValue > oldValue) {
+        console.log("mission complete", oldValue);
+      }
+      if (oldValue < 1500 && newValue < oldValue) {
+        console.log("save money!!");
+      }
     },
   },
   directives: {},
-  methods: {
-    getTotalScore() {
-      console.log("methods");
-      const { math, kor, eng, sci } = this.grade;
-      return math + kor + eng + sci;
-    },
-  },
+  methods: {},
 };
 </script>
 
