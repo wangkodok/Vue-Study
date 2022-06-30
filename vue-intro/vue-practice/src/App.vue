@@ -1,11 +1,15 @@
 <template>
   <div>
     <!-- <GreetingUser username="scalper" /> -->
-    <GreetingUser :username="username" />
-    <GreetingUser username="dooli" />
-    <GreetingUser username="pororo" />
-    <GreetingUser username="monkey" />
-    <GreetingUser />
+    <GreetingUser
+      :username="username"
+      :numberOfVisit="numberOfVisit"
+      :siteInfo="siteInfo"
+    />
+    <!-- <GreetingUser username="dooli" /> -->
+    <!-- <GreetingUser username="pororo" /> -->
+    <!-- <GreetingUser username="monkey" /> -->
+    <!-- <GreetingUser /> -->
     <button @click="changeName()">change</button>
   </div>
 </template>
@@ -20,6 +24,13 @@ export default {
   data() {
     return {
       username: "scalper",
+      numberOfVisit: undefined,
+      siteInfo: undefined,
+      // siteInfo: {
+      //   name: "vue",
+      //   teacher: "eas",
+      //   subject: "front-end",
+      // },
     };
   },
   methods: {
