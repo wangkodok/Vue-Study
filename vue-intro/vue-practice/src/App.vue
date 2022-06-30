@@ -1,39 +1,47 @@
 <template>
   <div>
     <h2>Hello Component</h2>
-    <button @click="displayDetail = true">show detail</button>
-    <DetailView
-      v-if="displayDetail"
-      @closeDetail="close"
-      @sendData="showData"
-    />
+    <!-- <CompLevel1 :username="username" /> -->
+    <button @click="activeTab = 'MenuCount1'">Menu 1</button>
+    <button @click="activeTab = 'MenuCount2'">Menu 2</button>
+    <button @click="activeTab = 'MenuCount3'">Menu 3</button>
+    <!-- <MenuCount1 v-if="activeTab === 'MenuCount1'" /> -->
+    <!-- <MenuCount2 v-if="activeTab === 'MenuCount2'" /> -->
+    <!-- <MenuCount3 v-if="activeTab === 'MenuCount3'" /> -->
+    <keep-alive>
+      <component :is="activeTab"></component>
+    </keep-alive>
   </div>
 </template>
 
 <script>
-import DetailView from "./components/DetailView.vue";
+// import CompLevel1 from "./components/provide-inject/CompLevel1.vue";
+import MenuCount1 from "./components/tabItems/MenuCount1.vue";
+import MenuCount2 from "./components/tabItems/MenuCount2.vue";
+import MenuCount3 from "./components/tabItems/MenuCount3.vue";
 export default {
   name: "App",
   components: {
-    DetailView,
+    // CompLevel1,
+    MenuCount1,
+    MenuCount2,
+    MenuCount3,
   },
   data() {
     return {
-      displayDetail: false,
+      username: "scalper",
+      activeTab: "MenuCount1",
+    };
+  },
+  provide() {
+    return {
+      name: this.username,
     };
   },
   computed: {},
   watch: {},
   directives: {},
-  methods: {
-    close() {
-      this.displayDetail = false;
-      console.log("eas");
-    },
-    showData(data) {
-      console.log(data, "data");
-    },
-  },
+  methods: {},
 };
 </script>
 
