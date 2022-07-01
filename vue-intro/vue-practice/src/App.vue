@@ -1,37 +1,26 @@
 <template>
   <div>
-    <h2>Hello Slots</h2>
-    <CardView>
-      <template v-slot:head>
-        <h3>Random Image</h3>
-      </template>
-      <template v-slot:default>
-        <img src="https://placeimg.com/100/50/ang" alt="random" />
-      </template>
-      <template v-slot:foot> <small>thank you</small> </template>
-    </CardView>
-    <!-- <CardView>
-      <img src="https://placeimg.com/100/50/ang" alt="random" />
-    </CardView>
-    <CardView>
-      <ul>
-        <li>짬뽕</li>
-        <li>짜장</li>
-      </ul>
-    </CardView>
-    <card-view> </card-view> -->
+    <h2>Hello Teleport</h2>
+    <teleport to="#extra-modal" :disabled="isTeleport">
+      <div class="modal">
+        this is rtreas
+        <button @click="isTeleport = !isTeleport">teleport toggle</button>
+      </div>
+    </teleport>
+    <teleport to="#extra-modal">
+      <div class="modal2">this is modal2</div>
+    </teleport>
   </div>
 </template>
 
 <script>
-import CardView from "./components/slot/CardView.vue";
 export default {
   name: "App",
-  components: {
-    CardView,
-  },
+  components: {},
   data() {
-    return {};
+    return {
+      isTeleport: false,
+    };
   },
   computed: {},
   watch: {},
@@ -40,4 +29,18 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.modal {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  font-size: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>
