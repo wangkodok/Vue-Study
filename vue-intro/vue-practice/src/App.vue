@@ -1,42 +1,37 @@
 <template>
   <div>
-    <h2>Hello Component</h2>
-    <!-- <CompLevel1 :username="username" /> -->
-    <button @click="activeTab = 'MenuCount1'">Menu 1</button>
-    <button @click="activeTab = 'MenuCount2'">Menu 2</button>
-    <button @click="activeTab = 'MenuCount3'">Menu 3</button>
-    <!-- <MenuCount1 v-if="activeTab === 'MenuCount1'" /> -->
-    <!-- <MenuCount2 v-if="activeTab === 'MenuCount2'" /> -->
-    <!-- <MenuCount3 v-if="activeTab === 'MenuCount3'" /> -->
-    <keep-alive>
-      <component :is="activeTab"></component>
-    </keep-alive>
+    <h2>Hello Slots</h2>
+    <CardView>
+      <template v-slot:head>
+        <h3>Random Image</h3>
+      </template>
+      <template v-slot:default>
+        <img src="https://placeimg.com/100/50/ang" alt="random" />
+      </template>
+      <template v-slot:foot> <small>thank you</small> </template>
+    </CardView>
+    <!-- <CardView>
+      <img src="https://placeimg.com/100/50/ang" alt="random" />
+    </CardView>
+    <CardView>
+      <ul>
+        <li>짬뽕</li>
+        <li>짜장</li>
+      </ul>
+    </CardView>
+    <card-view> </card-view> -->
   </div>
 </template>
 
 <script>
-// import CompLevel1 from "./components/provide-inject/CompLevel1.vue";
-import MenuCount1 from "./components/tabItems/MenuCount1.vue";
-import MenuCount2 from "./components/tabItems/MenuCount2.vue";
-import MenuCount3 from "./components/tabItems/MenuCount3.vue";
+import CardView from "./components/slot/CardView.vue";
 export default {
   name: "App",
   components: {
-    // CompLevel1,
-    MenuCount1,
-    MenuCount2,
-    MenuCount3,
+    CardView,
   },
   data() {
-    return {
-      username: "scalper",
-      activeTab: "MenuCount1",
-    };
-  },
-  provide() {
-    return {
-      name: this.username,
-    };
+    return {};
   },
   computed: {},
   watch: {},
