@@ -11,6 +11,11 @@ export default {
       username: "",
     };
   },
+  methods: {
+    sayHello() {
+      console.log("say Hello");
+    },
+  },
   beforeCreate() {
     console.log("child beforeCreate");
   },

@@ -1,6 +1,9 @@
 <template>
   <h2>Parent Component</h2>
-  <ChildComp v-if="showChild" />
+  <input v-model="nickname" ref="inputRef" />
+  <button @click="consoleRef">consoleRef</button>
+  <hr />
+  <ChildComp v-if="showChild" ref="childComp" />
   <button @click="showChild = false">unmount child</button>
 </template>
 
@@ -10,8 +13,18 @@ export default {
   name: "Parent-Comp",
   data() {
     return {
+      nickname: "",
       showChild: true,
     };
+  },
+  methods: {
+    consoleRef() {
+      // this.$refs.inputRef.focus();
+      // this.$refs.inputRef.style.border = "1px solid red";
+      console.log(this.$refs.inputRef, this, "inputRef");
+      console.log(this.$refs.childComp, this, "childComp");
+      this.$refs.childComp.sayHello();
+    },
   },
   components: {
     ChildComp,
@@ -29,10 +42,10 @@ export default {
     console.log("child mounted");
   },
   beforeUpdate() {
-    console.log("child beforeUpdate");
+    // console.log("child beforeUpdate");
   },
   undated() {
-    console.log("child undated");
+    // console.log("child undated");
   },
   beforeUnmount() {
     console.log("child beforeUnmount");
