@@ -1,48 +1,26 @@
 <template>
   <div>
-    <h2>Hello LifeCycle</h2>
-    <ParentComp />
+    <h2>Hello Mixins</h2>
+    <ProductStatus />
+    <FeeStatus />
+    <SavingStatus />
   </div>
 </template>
 
 <script>
-import ParentComp from "./components/lifecycle/ParentComp.vue";
+import ProductStatus from "./components/mixin/ProductStatus.vue";
+import FeeStatus from "./components/mixin/FeeStatus.vue";
+import SavingStatus from "./components/mixin/SavingStatus.vue";
 export default {
   name: "App",
   components: {
-    ParentComp,
-  },
-  beforeCreate() {
-    console.log("parent beforeCreate");
-  },
-  created() {
-    console.log("parent created");
-  },
-  beforeMount() {
-    console.log("parent beforeMount");
-  },
-  mounted() {
-    console.log("parent mounted");
-  },
-  beforeUpdate() {
-    console.log("parent beforeUpdate");
-  },
-  undated() {
-    console.log("parent undated");
-  },
-  beforeUnmount() {
-    console.log("parent beforeUnmount");
-  },
-  unmounted() {
-    console.log("parent unmounted");
+    ProductStatus,
+    FeeStatus,
+    SavingStatus,
   },
   data() {
     return {};
   },
-  computed: {},
-  watch: {},
-  directives: {},
-  methods: {},
 };
 </script>
 
