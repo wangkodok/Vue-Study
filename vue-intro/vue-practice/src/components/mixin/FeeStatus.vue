@@ -9,19 +9,17 @@
 </template>
 
 <script>
-import moneyMixins from "../../mixins/moneyMixins.js";
+import useMoney from "@/composables/useMoney";
 export default {
   name: "feeStatus",
-  mixins: [moneyMixins],
-  data() {
+  setup() {
+    useMoney;
+    const { addMoney, totalMoney } = useMoney();
+
     return {
-      // totalMoney: 0,
+      addMoney,
+      totalMoney,
     };
-  },
-  methods: {
-    // addMoney(price) {
-    //   this.totalMoney = this.totalMoney + price;
-    // },
   },
 };
 </script>

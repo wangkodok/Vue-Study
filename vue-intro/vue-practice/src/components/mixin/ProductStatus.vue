@@ -12,21 +12,17 @@
 </template>
 
 <script>
-import moneyMixins from "../../mixins/moneyMixins.js";
+import useMoney from "@/composables/useMoney";
 export default {
   name: "ProductStatus",
-  mixins: [moneyMixins],
-  components: {},
-  data() {
+  setup() {
+    useMoney;
+    const { addMoney, totalMoney } = useMoney();
+
     return {
-      // totalMoney: 0,
-      totalMoney: 3000,
+      addMoney,
+      totalMoney,
     };
-  },
-  methods: {
-    // addMoney(price) {
-    //   this.totalMoney = this.totalMoney + price;
-    // },
   },
 };
 </script>

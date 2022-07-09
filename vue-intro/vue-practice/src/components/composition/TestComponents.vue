@@ -1,25 +1,24 @@
 <template>
-  <h2>Hello LifeCycle</h2>
-  <!-- <input type="text" v-model="username" ref="inputRef" /> -->
-
-  <ChildComponent
-    firstname="Code"
-    lastname="Scalper"
-    @sendParent="sendParent"
-  />
+  <h2>Hello Reusability</h2>
+  <hr />
+  <FeeStatus />
+  <hr />
+  <ProductStatus />
+  <hr />
+  <SavingStatus />
 </template>
 
 <script>
-import ChildComponent from "./ChildComponent.vue";
+import FeeStatus from "../mixin/FeeStatus.vue";
+import ProductStatus from "../mixin/ProductStatus.vue";
+import SavingStatus from "../mixin/SavingStatus.vue";
+import {} from "vue";
 export default {
   name: "TestComponent",
   components: {
-    ChildComponent,
-  },
-  methods: {
-    sendParent() {
-      console.log("클릭하면 나와라!!!");
-    },
+    FeeStatus,
+    ProductStatus,
+    SavingStatus,
   },
 };
 </script>
