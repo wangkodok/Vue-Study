@@ -1,39 +1,84 @@
 <template>
   <h2>{{ username }}</h2>
-  <button @click="changeName">ChangeUserName</button>
-
-  <h2>제품명: {{ name }}, 가격 {{ price }}</h2>
-  <button @click="changeProduct">제품 바꾸기</button>
-
+  <hr />
   <div>
-    <input type="text" v-model="username" />
+    price <input type="number" v-model="price" /> amount
+    <input type="number" v-model="amount" />
+    <h3>Total Price :: {{ totalPrice }}</h3>
+  </div>
+  <hr />
+  <div>
+    first <input type="text" v-model="home.city" /> last<input
+      type="text"
+      v-model="last"
+    />
+    <h3>Full name :: {{ fullName }}</h3>
   </div>
 </template>
 
 <script>
-import { ref, reactive, toRefs } from "vue";
+import { ref, computed, reactive, toRefs, watch } from "vue";
 export default {
   name: "TestComponent",
   setup() {
     const username = ref("scalper");
-    function changeName() {
-      username.value = "Messi";
-    }
-    const state = reactive({
-      name: "TV",
-      price: 100,
+    const price = ref(5000);
+    const amount = ref(1);
+    console.log(price);
+    const totalPrice = computed(() => {
+      return price.value + amount.value;
     });
-    function changeProduct() {
-      state.name = "세탁기";
-      state.price = 5000;
-    }
+    watch(price, (newValue, oldValue) => {
+      console.log(newValue, oldValue);
+    });
+    const state = reactive({
+      first: "Code",
+      last: "Scalper",
+      home: {
+        city: "Seoul",
+        type: "Apartment",
+      },
+    });
+    const fullName = computed(function () {
+      return `${state.first} ${state.last}`;
+    });
+    watch(
+      () => {
+        return { ...state.home };
+      },
+      (newValue, oldValue) => {
+        console.log(newValue, oldValue);
+      },
+      { deep: true }
+    );
+    watch(
+      () => {
+        return state.home;
+      },
+      (newValue, oldValue) => {
+        console.log(newValue, oldValue);
+      }
+    );
     return {
       username,
-      changeName,
-      changeProduct,
+      price,
+      amount,
+      totalPrice,
       ...toRefs(state),
+      fullName,
     };
   },
+  // data() {
+  //   return {
+  //     price: 5000,
+  //     amount: 1,
+  //   };
+  // },
+  // computed: {
+  //   totalPrice() {
+  //     return this.price * this.price;
+  //   },
+  // },
 };
 </script>
 
